@@ -25,8 +25,15 @@ _model_source = CODEBERT_DIR_LOCAL if os.path.exists(CODEBERT_DIR_LOCAL) else HF
 
 print(f"Dang load CodeBERT model tu: {_model_source}")
 _device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-_model = AutoModelForSequenceClassification.from_pretrained(_model_source).to(_device)
-_tokenizer = AutoTokenizer.from_pretrained(_model_source)
+HF_MODEL_REVISION = "9f3e95eede06712589613cfe22bb4f7513b06925"
+
+if _model_source == HF_MODEL_ID:
+    _model = AutoModelForSequenceClassification.from_pretrained(_model_source, revision=HF_MODEL_REVISION).to(_device)
+    _tokenizer = AutoTokenizer.from_pretrained(_model_source, revision=HF_MODEL_REVISION)
+else:
+    # nosec B615 - tai model local (thu muc tren dia), khong phai tai tu Hugging Face Hub nen khong can revision pinning
+    _model = AutoModelForSequenceClassification.from_pretrained(_model_source).to(_device)  # nosec B615
+    _tokenizer = AutoTokenizer.from_pretrained(_model_source)  # nosec B615
 
 # label_encoder van uu tien local; neu khong co (CI), dung danh sach nhan co dinh da biet
 LABEL_ENCODER_PATH = os.path.join(MODELS_DIR, "label_encoder.pkl")
@@ -56,7 +63,8 @@ def tier1_predict(code: str) -> DetectionResult:
         tmp.write(code)
         tmp_path = tmp.name
     try:
-        result = subprocess.run(
+                # nosec B603 - dung list argument (khong shell=True), sys.executable la duong dan tin cay tu chinh Python runtime, khong phai input tu nguoi dung
+        result = subprocess.run(  # nosec B603 - list argument, khong shell=True, sys.executable la duong dan tin cay
             [sys.executable, "-m", "bandit", "-f", "json", tmp_path],
             capture_output=True, text=True, timeout=10
         )
