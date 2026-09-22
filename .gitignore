@@ -1,0 +1,13 @@
+﻿__pycache__/
+*.pyc
+CVEfixes.db
+dataset/*.csv
+dataset/*.json
+!dataset/LIMITATION_NOTE_CWE798.md
+models/*.pkl
+models/codebert_finetuned/
+bandit-main/
+test/output*.json
+*.sarif.json
+cyberseceval/
+securityeval/

@@ -1,0 +1,14 @@
+{
+  "model": "XGBoost (multi-class, 6 lop: 5 CWE + SAFE)",
+  "feature_set": "keyword-regex + AST dangerous-call + AST XSS + AST path-traversal (khong gom code_lines/code_chars)",
+  "accuracy": 0.6929824561403509,
+  "f1_macro": 0.49507586430663353,
+  "train_samples": 455,
+  "test_samples": 114,
+  "notes": [
+    "Khong dung sample_weight balanced vi gay over-correct nghiem trong (SAFE recall giam con 0.12).",
+    "Data augmentation bang AST variable-renaming khong cai thien ket qua voi RF/XGBoost vi dac trung khong phu thuoc ten bien; augmentation nay du kien se huu ich hon cho CodeBERT (hoc truc tiep tu token).",
+    "CWE-798 co qua it mau (6 train/2 test) - danh gia rieng biet, khong dua vao so sanh dinh luong chinh.",
+    "code_lines/code_chars bi loai khoi feature set vi la 'shortcut gia', khong phan anh ban chat lo hong."
+  ]
+}

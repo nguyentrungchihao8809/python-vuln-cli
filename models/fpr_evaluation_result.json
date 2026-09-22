@@ -1,0 +1,7 @@
+{
+  "evaluation": "False Positive Rate (FPR) tren tap SAFE that su (in-distribution test set)",
+  "n_safe_samples": 74,
+  "fpr_bandit_rule_based": 0.0676,
+  "fpr_codebert_ml": 0.1622,
+  "comparison_note": "Bandit co FPR thap hon 2.4 lan so voi CodeBERT, phu hop dac tinh rule-based (chi bao dong khi khop chinh xac pattern). CodeBERT co FPR cao hon nhung doi lai phat hien duoc nhieu lo hong tinh vi hon (F1-macro cao hon dang ke). Day la trade-off Precision/Recall can luu y khi trien khai he thong thuc te - co the dieu chinh threshold tuy muc do uu tien."
+}

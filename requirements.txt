@@ -1,0 +1,7 @@
+﻿torch
+transformers
+pydantic
+pandas
+scikit-learn
+joblib
+bandit
