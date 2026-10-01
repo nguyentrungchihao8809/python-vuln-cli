@@ -10,12 +10,12 @@ EXCLUDE_DIRS = {"venv", ".venv", "__pycache__", ".git", "node_modules", "env"}
 
 
 def find_python_files(target_path: str):
-    """Neu target_path la file -> tra ve chinh no. Neu la thu muc -> quet dequy tim .py."""
+    """Neu target_path la file -> tra ve chinh no. Neu la thu muc -> quet dequy tim .py.""" 
     if os.path.isfile(target_path):
         if target_path.endswith(".py"):
             return [target_path]
         else:
-            print(f"[CANH BAO] File khong phai .py, bo qua: {target_path}")
+            print(f"[CANH BAO] File khong phai .py, bo qua: {target_path}") //test
             return []
 
     py_files = []
