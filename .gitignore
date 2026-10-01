@@ -11,3 +11,6 @@ test/output*.json
 *.sarif.json
 cyberseceval/
 securityeval/
+
+HUONG_DAN_DEMO_HOI_DONG.md
+tree.txt
