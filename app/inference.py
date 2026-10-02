@@ -35,14 +35,36 @@ else:
     _model = AutoModelForSequenceClassification.from_pretrained(_model_source).to(_device)  # nosec B615
     _tokenizer = AutoTokenizer.from_pretrained(_model_source)  # nosec B615
 
-# label_encoder van uu tien local; neu khong co (CI), dung danh sach nhan co dinh da biet
-LABEL_ENCODER_PATH = os.path.join(MODELS_DIR, "label_encoder.pkl")
-if os.path.exists(LABEL_ENCODER_PATH):
-    _label_encoder = joblib.load(LABEL_ENCODER_PATH)
-else:
-    from sklearn.preprocessing import LabelEncoder
-    _label_encoder = LabelEncoder()
-    _label_encoder.classes_ = np.array(['CWE-22', 'CWE-78', 'CWE-79', 'CWE-798', 'CWE-89', 'SAFE'])
+# Label mapping phai khop voi model CodeBERT 5-class hien tai.
+# CWE-798 da duoc loai khoi training.
+from sklearn.preprocessing import LabelEncoder
+
+_label_encoder = LabelEncoder()
+_label_encoder.classes_ = np.array([
+    "CWE-22",
+    "CWE-78",
+    "CWE-79",
+    "CWE-89",
+    "SAFE",
+])
+
+# Temperature Scaling calibration artifact.
+CALIBRATION_PATH = os.path.join(
+    MODELS_DIR,
+    "codebert_5class_calibration",
+    "temperature_scaling.json",
+)
+
+with open(CALIBRATION_PATH, "r", encoding="utf-8-sig") as f:
+    _calibration = json.load(f)
+
+TEMPERATURE = float(_calibration["temperature"])
+
+if _calibration["num_classes"] != len(_label_encoder.classes_):
+    raise ValueError(
+        f"Calibration num_classes={_calibration['num_classes']} "
+        f"khong khop voi label mapping={len(_label_encoder.classes_)}"
+    )
 
 _model.eval()
 print(f"Da load xong. Dang chay tren: {_device}")
@@ -96,7 +118,9 @@ def tier2_predict(code: str, max_len: int = 512) -> DetectionResult:
 
     with torch.no_grad():
         outputs = _model(**inputs)
-        proba = F.softmax(outputs.logits, dim=1).cpu().numpy()[0]
+
+
+        proba = F.softmax(outputs.logits / TEMPERATURE, dim=1).cpu().numpy()[0]
 
     pred_idx = proba.argmax()
     pred_label = _label_encoder.inverse_transform([pred_idx])[0]

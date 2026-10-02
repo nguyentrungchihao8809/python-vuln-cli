@@ -6,6 +6,8 @@ dataset/*.json
 !dataset/LIMITATION_NOTE_CWE798.md
 models/*.pkl
 models/codebert_finetuned/
+models/codebert_finetuned_old_6class/
+models/codebert_onnx/
 bandit-main/
 test/output*.json
 *.sarif.json

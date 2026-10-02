@@ -1,0 +1,14 @@
+﻿{
+  "method": "temperature_scaling",
+  "temperature": 1.627714614648346,
+  "num_classes": 5,
+  "id2label": {
+    "0": "CWE-22",
+    "1": "CWE-78",
+    "2": "CWE-79",
+    "3": "CWE-89",
+    "4": "SAFE"
+  },
+  "fit_dataset": "validation",
+  "fit_samples": 84
+}
