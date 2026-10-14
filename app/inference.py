@@ -25,7 +25,7 @@ _model_source = CODEBERT_DIR_LOCAL if os.path.exists(CODEBERT_DIR_LOCAL) else HF
 
 print(f"Dang load CodeBERT model tu: {_model_source}")
 _device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-HF_MODEL_REVISION = "9f3e95eede06712589613cfe22bb4f7513b06925"
+HF_MODEL_REVISION = "7d482a90aa4e03487c3910eddf5622906591bd5c"
 
 if _model_source == HF_MODEL_ID:
     _model = AutoModelForSequenceClassification.from_pretrained(_model_source, revision=HF_MODEL_REVISION).to(_device)
