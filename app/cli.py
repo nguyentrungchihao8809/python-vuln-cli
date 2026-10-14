@@ -15,7 +15,7 @@ def find_python_files(target_path: str):
         if target_path.endswith(".py"):
             return [target_path]
         else:
-            print(f"[CANH BAO] File khong phai .py, bo qua: {target_path}") //test
+            print(f"[CANH BAO] File khong phai .py, bo qua: {target_path}")
             return []
 
     py_files = []
@@ -48,10 +48,19 @@ def scan_file(file_path: str):
     responses = []
     vulnerable_count = 0
 
+    
     for func in functions:
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        absolute_file_path = os.path.abspath(file_path)
+
+        try:
+            sarif_file_path = os.path.relpath(absolute_file_path, repo_root)
+        except ValueError:
+            sarif_file_path = file_path
+
         request = CodeSnippetRequest(
             code=func["code"],
-            file_path=file_path,
+            file_path=sarif_file_path.replace("\\", "/"),
             function_name=func["name"],
             start_line=func["start_line"]
         )
@@ -68,8 +77,6 @@ def scan_file(file_path: str):
                 conf_str = f"{det.confidence:.2f}" if det.confidence is not None else "N/A"
                 print(f"           - {det.source}: {det.predicted_label} (confidence={conf_str})")
 
-    print(f"\n{'-'*70}")
-    print(f"Ket qua file: {vulnerable_count}/{len(functions)} ham co canh bao")
 
     return responses
 
