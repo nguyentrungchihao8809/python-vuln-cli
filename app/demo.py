@@ -37,7 +37,7 @@ def connect_database():
 
 
 def main():
-    print("hello world")
+    print("python detect vulnerabilities")
 
 
 if __name__ == "__main__":
