@@ -29,3 +29,5 @@ def delete_file(filename):
         return True
 
     return False
+
+print("hello world")
