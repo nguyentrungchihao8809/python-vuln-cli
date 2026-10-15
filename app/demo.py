@@ -1,10 +1,13 @@
 
 from pathlib import Path
 
+import sqlite3
+
 
 BASE_DIR = Path("uploads")
 
 
+# CWE-22: Path Traversal
 def read_file(filename):
     file_path = BASE_DIR / filename
 
@@ -12,22 +15,30 @@ def read_file(filename):
         return file.read()
 
 
+# CWE-22: Path Traversal
 def download_file(filename):
     file_path = BASE_DIR / filename
 
     with open(file_path, "rb") as file:
-        content = file.read()
+        return file.read()
 
-    return content
+# CWE-79: Cross-Site Scripting (XSS)
+def render_search_result(query):
+    return f"<div>Search result: {query}</div>"
 
 
-def delete_file(filename):
-    file_path = BASE_DIR / filename
+# CWE-798: Hardcoded Credentials
+def connect_database():
+    username = "admin"
+    password = "Admin123!Hardcoded"
 
-    if file_path.exists():
-        file_path.unlink()
-        return True
+    connection = sqlite3.connect("app.db")
+    return username, password, connection
 
-    return False
 
-print("hello world")
+def main():
+    print("hello world")
+
+
+if __name__ == "__main__":
+    main()
