@@ -69,31 +69,6 @@ ightarrow 0.1779$ trên tập test.
 
 ---
 
-## Cấu trúc dự án (Directory Structure)
-
-dataset_py/
-├── app/
-│   ├── cli.py                  # Giao diện dòng lệnh quét mã nguồn
-│   └── inference.py            # Pipeline xử lý suy luận (Bandit-first + CodeBERT)
-├── dataset/
-│   ├── train_dataset_v1.csv    # Dữ liệu huấn luyện
-│   ├── val_split.csv           # Dữ liệu validation
-│   └── test_split.csv          # Dữ liệu test chính thức (84 samples)
-├── models/
-│   ├── codebert_finetuned/     # Model CodeBERT fine-tuned 5 classes
-│   └── codebert_5class_calibration/ # Cấu hình Temperature Scaling
-├── script/
-│   ├── 05_extract_dataset.py   # Trích xuất dữ liệu từ SQLite CVEfixes
-│   ├── 26_split_train_test.py  # Phân chia dữ liệu train/val/test
-│   └── 27_evaluate_models.py   # Script đánh giá mô hình chuẩn hóa
-├── test/
-│   ├── demo_tier2.py           # File mã nguồn mẫu kiểm thử
-│   └── demo_tier2.sarif        # File báo cáo kết quả định dạng SARIF
-├── CVEfixes.db                 # Cơ sở dữ liệu SQLite chứa các commit/vulnerability
-└── README.md                   # Tài liệu hướng dẫn sử dụng dự án
-
----
-
 ## Hướng dẫn cài đặt & Sử dụng (Getting Started)
 
 ### 1. Yêu cầu hệ thống
