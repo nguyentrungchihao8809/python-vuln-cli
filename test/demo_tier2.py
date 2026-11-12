@@ -6,3 +6,4 @@ def read_file(filename):
     return file_path.read_text()
 
 #cwe22
+# python dêtct
