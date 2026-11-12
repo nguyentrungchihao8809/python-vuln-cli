@@ -1,0 +1,201 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "python-vuln-cli",
+          "version": "1.0.0",
+          "informationUri": "https://github.com/your-org/python-vuln-cli",
+          "rules": [
+            {
+              "id": "CWE-89",
+              "name": "SQLInjection",
+              "shortDescription": {
+                "text": "SQL Injection"
+              },
+              "fullDescription": {
+                "text": "Phat hien boi he thong ket hop phan tich tinh va hoc may: SQL Injection"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "CWE-798",
+              "name": "UseofHard-codedCredentials",
+              "shortDescription": {
+                "text": "Use of Hard-coded Credentials"
+              },
+              "fullDescription": {
+                "text": "Phat hien boi he thong ket hop phan tich tinh va hoc may: Use of Hard-coded Credentials"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "CWE-22",
+              "name": "PathTraversal",
+              "shortDescription": {
+                "text": "Path Traversal"
+              },
+              "fullDescription": {
+                "text": "Phat hien boi he thong ket hop phan tich tinh va hoc may: Path Traversal"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "CWE-78",
+              "name": "OSCommandInjection",
+              "shortDescription": {
+                "text": "OS Command Injection"
+              },
+              "fullDescription": {
+                "text": "Phat hien boi he thong ket hop phan tich tinh va hoc may: OS Command Injection"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "CWE-79",
+              "name": "Cross-SiteScripting(XSS)",
+              "shortDescription": {
+                "text": "Cross-Site Scripting (XSS)"
+              },
+              "fullDescription": {
+                "text": "Phat hien boi he thong ket hop phan tich tinh va hoc may: Cross-Site Scripting (XSS)"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CWE-89",
+          "level": "error",
+          "message": {
+            "text": "Phat hien SQL Injection trong ham 'get_user'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test\\demo_all.py"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ],
+          "properties": {
+            "detections": [
+              {
+                "source": "bandit",
+                "predicted_label": "CWE-89",
+                "confidence": null
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "CWE-22",
+          "level": "warning",
+          "message": {
+            "text": "Phat hien Path Traversal trong ham 'read_file'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test\\demo_tier2.py"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ],
+          "properties": {
+            "detections": [
+              {
+                "source": "bandit",
+                "predicted_label": "SAFE",
+                "confidence": null
+              },
+              {
+                "source": "codebert",
+                "predicted_label": "CWE-22",
+                "confidence": 0.5422643423080444
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "CWE-78",
+          "level": "error",
+          "message": {
+            "text": "Phat hien OS Command Injection trong ham 'run_command'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test\\sample_vuln.py"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ],
+          "properties": {
+            "detections": [
+              {
+                "source": "bandit",
+                "predicted_label": "CWE-78",
+                "confidence": null
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "CWE-89",
+          "level": "error",
+          "message": {
+            "text": "Phat hien SQL Injection trong ham 'get_user'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test\\sample_vuln.py"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ],
+          "properties": {
+            "detections": [
+              {
+                "source": "bandit",
+                "predicted_label": "CWE-89",
+                "confidence": null
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
