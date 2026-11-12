@@ -88,7 +88,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "test\\demo_tier2.py"
+                  "uri": "test/demo_tier2.py"
                 },
                 "region": {
                   "startLine": 3

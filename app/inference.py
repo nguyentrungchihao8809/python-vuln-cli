@@ -1,4 +1,4 @@
-import os
+﻿import os
 import re
 import ast
 import json
@@ -109,7 +109,7 @@ def tier1_predict(code: str) -> DetectionResult:
     )
 
 
-# ============ TIER 2: CODEBERT (ML) ============
+
 def tier2_predict(code: str, max_len: int = 512) -> DetectionResult:
     inputs = _tokenizer(
         code, truncation=True, max_length=max_len,
